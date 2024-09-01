@@ -4,29 +4,19 @@ use std::rc::Rc;
 const CSS: &[u8] = br#"
 "#;
 
-const COLUMNS: &[&[Section]] = &[&[    
+const COLUMNS: &[&[Section]] = &[&[
     Section::new(
         "Launcher Shortcuts",
         &[
-            Shortcut::new(
-                "Launch this overview",
-                Event::Overview,
-                Schema::Hardcoded(&["Super", "Z"]),
-            ),
             Shortcut::new(
                 "Activate Launcher",
                 Event::Search,
                 Schema::Hardcoded(&["Super"]),
             ),
             Shortcut::new(
-                "Show Applications",
-                Event::ShowApplications,
-                Schema::Hardcoded(&["Alt", "Tab"]),
-            ),
-            Shortcut::new(
-                "Scroll through the Launcher list (or use Arrow keys)",
+                "Scroll through the Launcher list",
                 Event::ScrollLauncher,
-                Schema::Hardcoded(&["Ctrl", "↑", "↓"]),
+                Schema::Hardcoded(&["↑", "↓"]),
             ),
             Shortcut::new(
                 "Execute a command in a terminal",
@@ -43,20 +33,100 @@ const COLUMNS: &[&[Section]] = &[&[
                 Event::Calculate,
                 Schema::Hardcoded(&["="]),
             ),
+            Shortcut::new(
+                "Show all Applications",
+                Event::ShowApplications,
+                Schema::Hardcoded(&["Super", "A"]),
+            ),
+            Shortcut::new(
+                "Launch Terminal",
+                Event::Terminal,
+                Schema::Hardcoded(&["Super", "T"]),
+            ),
+            Shortcut::new(
+                "Launch Browser",
+                Event::Browser,
+                Schema::Hardcoded(&["Super", "B"]),
+            ),
+            Shortcut::new(
+                "Launch File Manager",
+                Event::FileManager,
+                Schema::Hardcoded(&["Super", "E"]),
+            ),
+            Shortcut::new(
+                "Launch Text Editor",
+                Event::TextEditor,
+                Schema::Hardcoded(&["Super", "F"]),
+            ),
+            Shortcut::new(
+                "Launch this overview",
+                Event::Overview,
+                Schema::Hardcoded(&["Super", "Z"]),
+            ),
         ],
-    ),            
+    ),
     Section::new(
-        "Window Shortcuts",
+        "Window & Workspace Management Shortcuts",
         &[
+            Shortcut::new(
+                "Show Workspace overview",
+                Event::ShowWorkspaces,
+                Schema::Hardcoded(&["Super", "Tab"]),
+            ),
+            Shortcut::new(
+                "Switch between open windows",
+                Event::SwitchWindows,
+                Schema::Hardcoded(&["Alt", "Tab"]),
+            ),
+            Shortcut::new(
+                "Switch focus to the workspace above",
+                Event::MoveWorkspaceAbove,
+                Schema::Hardcoded(&["Ctrl", "Super", "↑"]),
+            ),
+            Shortcut::new(
+                "Switch focus to the workspace below",
+                Event::MoveWorkspaceBelow,
+                Schema::Hardcoded(&["Ctrl", "Super", "↓"]),
+            ),
             Shortcut::new(
                 "Switch focus between windows",
                 Event::SwitchFocus,
                 Schema::Hardcoded(&["Super", "←", "↓", "↑", "→"]),
             ),
             Shortcut::new(
-                "Change window orientation",
-                Event::OrientationToggle,
+                "Move window",
+                Event::MoveWindow,
+                Schema::Hardcoded(&["Super", "Shift", "←", "↓", "↑", "→"]),
+            ),
+            Shortcut::new(
+                "Move window up one workspace",
+                Event::MoveWorkspaceAbove,
+                Schema::Hardcoded(&["Ctrl", "Super", "Shift", "↑"]),
+            ),
+            Shortcut::new(
+                "Move window down one workspace",
+                Event::MoveWorkspaceBelow,
+                Schema::Hardcoded(&["Ctrl", "Super", "Shift", "↓"]),
+            ),
+            Shortcut::new(
+                "Move window one monitor to the left",
+                Event::MoveMonitorLeft,
+                Schema::Hardcoded(&["Ctrl", "Super", "Shift", "←"]),
+            ),
+            Shortcut::new(
+                "Move window to one monitor to the right",
+                Event::MoveMonitorRight,
+                Schema::Hardcoded(&["Ctrl", "Super", "Shift", "→"]),
+            ),
+            Shortcut::new(
+                "Swap windows (keep pressed, then use arrow keys)",
+                Event::SwapWindows,
                 Schema::Hardcoded(&["Super", "X"]),
+            ),
+            Shortcut::new(
+                "Toggle window orientation",
+                Event::OrientationToggle,
+                Schema::Hardcoded(&["Super", "O"]),
             ),
             Shortcut::new(
                 "Toggle floating mode",
@@ -74,164 +144,29 @@ const COLUMNS: &[&[Section]] = &[&[
                 Schema::Hardcoded(&["Super", "S"]),
             ),
             Shortcut::new(
-                "Change window orientation",
-                Event::OrientationToggle,
-                Schema::Hardcoded(&["Super", "X"]),
+                "Toggle maximize",
+                Event::MaximizeToggle,
+                Schema::Hardcoded(&["Super", "M"]),
             ),
             Shortcut::new(
                 "Close window",
                 Event::CloseWindow,
                 Schema::Hardcoded(&["Super", "Q"]),
             ),
-            Shortcut::new(
-                "Toggle maximize",
-                Event::MaximizeToggle,
-                Schema::Hardcoded(&["Super", "M"]),
-            ),
              Shortcut::new(
                 "Hide current window",
                 Event::HideWindow,
                 Schema::Hardcoded(&["Super", "H"]),
-            ),            
-             Shortcut::new(
-                "Move current window",
-                Event::MoveWindow,
-                Schema::Hardcoded(&["Alt", "M"]),
             ),
              Shortcut::new(
-                "Resize current window",
-                Event::ResizeWindow,
-                Schema::Hardcoded(&["Alt", "R"]),
+                "Resize window inward (smaller)",
+                Event::ResizeWindowInward,
+                Schema::Hardcoded(&["Super", "Shift", "R"]),
             ),
              Shortcut::new(
-                "Always on top",
-                Event::AlwaysOnTop,
-                Schema::Hardcoded(&["Alt", "T"]),
-            ),            
-             Shortcut::new(
-                "Quicktile window to the top",
-                Event::QuicktileTop,
-                Schema::Hardcoded(&["Ctrl", "Super", "PgUp"]),
-            ),
-            Shortcut::new(
-                "Quicktile window to the bottom",
-                Event::QuicktileBottom,
-                Schema::Hardcoded(&["Ctrl", "Super", "PgDn"]),
-            ),
-            Shortcut::new(
-                "Quicktile window to the left",
-                Event::QuicktileLeft,
-                Schema::Hardcoded(&["Ctrl", "Super", "←"]),
-            ),
-            Shortcut::new(
-                "Quicktile window to the right",
-                Event::QuicktileRight,
-                Schema::Hardcoded(&["Ctrl", "Super", "→"]),
-            ),
-            Shortcut::new(
-                "Quicktile window to the topleft",
-                Event::QuicktileTopLeft,
-                Schema::Hardcoded(&["Ctrl", "Super", "H"]),
-            ),
-            Shortcut::new(
-                "Quicktile window to the bottomleft",
-                Event::QuicktileBottomLeft,
-                Schema::Hardcoded(&["Ctrl", "Super", "J"]),
-            ),
-            Shortcut::new(
-                "Quicktile window to the topright",
-                Event::QuicktileTopRight,
-                Schema::Hardcoded(&["Ctrl", "Super", "K"]),
-            ),
-            Shortcut::new(
-                "Quicktile window to the bottomright",
-                Event::QuicktileBottomRight,
-                Schema::Hardcoded(&["Ctrl", "Super", "L"]),
-            ),
-        ],
-    ),              
-    Section::new(
-        "Displays & Workspaces",
-        &[
-            Shortcut::new(
-                "Move current window up one workspace",
-                Event::MoveWorkspaceAbove,
-                Schema::Hardcoded(&["Super", "Shift", "↑"]),
-            ),
-            Shortcut::new(
-                "Move current window down one workspace",
-                Event::MoveWorkspaceBelow,
-                Schema::Hardcoded(&["Super", "Shift", "↓"]),
-            ),
-            Shortcut::new(
-                "Switch focus to the workspace above",
-                Event::MoveWorkspaceAbove,
-                Schema::Hardcoded(&["Super", "Ctrl", "↑"]),
-            ),
-            Shortcut::new(
-                "Switch focus to the workspace below",
-                Event::MoveWorkspaceBelow,
-                Schema::Hardcoded(&["Super", "Ctrl", "↓"]),
-            ),
-            Shortcut::new(
-                "Move current window one monitor to the left",
-                Event::MoveMonitorLeft,
-                Schema::Hardcoded(&["Super", "Shift", "←"]),
-            ),
-            Shortcut::new(
-                "Move current window to one monitor to the right",
-                Event::MoveMonitorRight,
-                Schema::Hardcoded(&["Super", "Shift", "→"]),
-            ),
-        ],
-    ),          
-    Section::new(
-        "Move, resize and swap windows in adjustment mode",
-        &[
-            Shortcut::new(
-                "Enter adjustment mode",
-                Event::EnterAdjustment,
-                Schema::Hardcoded(&["Super", "Enter"]),
-            ),
-            Shortcut::new(
-                "Move window",
-                Event::MoveWindow,
-                Schema::Hardcoded(&["←", "↓", "↑", "→"]),
-            ),
-            Shortcut::new(
-                "Swap windows",
-                Event::SwapWindows,
-                Schema::Hardcoded(&["Ctrl", "←", "↓", "↑", "→"]),
-            ),
-            Shortcut::new(
-                "Increase Window Size",
-                Event::ResizeWindowIncrease,
-                Schema::Hardcoded(&["Shift", "→", "↓"]),
-            ),
-            Shortcut::new(
-                "Decrease Window Size",
-                Event::ResizeWindowDecrease,
-                Schema::Hardcoded(&["Shift", "←", "↑"]),
-            ),
-            Shortcut::new(
-                "Toggle stacking mode",
-                Event::Stacking,
-                Schema::Hardcoded(&["S"]),
-            ),
-            Shortcut::new(
-                "Change window orientation",
-                Event::OrientationToggle,
-                Schema::Hardcoded(&["X"]),
-            ),
-            Shortcut::new(
-                "Apply changes",
-                Event::ApplyChanges,
-                Schema::Hardcoded(&["Enter"]),
-            ),
-            Shortcut::new(
-                "Cancel",
-                Event::Cancel,
-                Schema::Hardcoded(&["Esc"]),
+                "Resize window outward (bigger)",
+                Event::ResizeWindowOutward,
+                Schema::Hardcoded(&["Super", "R"]),
             ),
         ],
     ),
@@ -239,13 +174,9 @@ const COLUMNS: &[&[Section]] = &[&[
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq)]
 pub enum Event {
-    AlwaysOnTop,
-    ApplyChanges,
     AutoTileToggle,
     Calculate,
-    Cancel,
     CloseWindow,
-    EnterAdjustment,
     ExecuteCommandSh,
     ExecuteCommandTerminal,
     FloatingToggle,
@@ -256,25 +187,22 @@ pub enum Event {
     MoveWindow,
     MoveWorkspaceAbove,
     MoveWorkspaceBelow,
+    Overview,
     OrientationToggle,
-    Overview,            
-    QuicktileTop,
-    QuicktileBottom,
-    QuicktileLeft, 
-    QuicktileRight,
-    QuicktileTopLeft,
-    QuicktileBottomLeft,
-    QuicktileTopRight,
-    QuicktileBottomRight,
-    ResizeWindow,
-    ResizeWindowDecrease,
-    ResizeWindowIncrease,
+    ResizeWindowInward,
+    ResizeWindowOutward,
     ScrollLauncher,
     Search,
     ShowApplications,
     Stacking,
     SwapWindows,
     SwitchFocus,
+    ShowWorkspaces,
+    SwitchWindows,
+    Terminal,
+    Browser,
+    FileManager,
+    TextEditor,
 }
 
 pub struct Section {
