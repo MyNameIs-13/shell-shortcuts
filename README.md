@@ -23,7 +23,7 @@ apt install cargo libgtk-3-dev rustc
 First, get the project's source code.
 
 ```sh
-git clone https://github.com/pop-os/shell-shortcuts.git
+git clone https://github.com/MyNameIs-13/shell-shortcuts.git
 ```
 
 The following `make` commands are run from the top-level of the source directory, so move to that directory.
