@@ -1,6 +1,0 @@
-/.cargo
-/debian/.debhelper
-/debian/files
-/target
-/vendor
-/vendor.tar.xz
