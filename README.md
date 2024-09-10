@@ -1,6 +1,8 @@
 # COSMIC Pop Shortcuts
 
-Keyboard shortcut overview
+Application for displaying Pop Keyboard Shortcuts.
+
+![](screenshot.png)
 
 ## Getting Started
 
@@ -10,9 +12,6 @@ GUI development and Rust are both out of my wheelhouse
 ## Development
 
 Based on https://github.com/edfloreshz/cosmic-app-template
-When you open the repository in your code editor, you will see a lot of comments in the code. These comments are there to help you get a basic understanding of what each part of the code does.
-
-Once you feel comfortable with it, refer back to the [COSMIC documentation](https://pop-os.github.io/libcosmic/cosmic/) for more information on how to build COSMIC applications.
 
 ## Install
 
@@ -50,3 +49,11 @@ just debpkg
 
 With cargo `cargo-deb` your package configuration is in `Cargo.toml` in the `[package.metadata.deb]` section.
 Since TOML doesn't really support variables you have to update everything manually (for now).
+
+
+## Run
+
+Execute the `pop-shortcuts` binary. Assuming the binary has been installed in your path, run it as usual.
+```sh
+pop-shortcuts
+```
