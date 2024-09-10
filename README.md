@@ -1,15 +1,15 @@
-# COSMIC Application Template
+# COSMIC Pop Shortcuts
 
-A template for COSMIC applications.
+Keyboard shortcut overview
 
 ## Getting Started
 
-To get started, click the "Use this template" button above. This will create a new repository in your account with the contents of this template.
-
-Once you have created a new repository from this template, you can clone it to your local machine and start developing your COSMIC application.
+I have no idea what I am doing.
+GUI development and Rust are both out of my wheelhouse
 
 ## Development
 
+Based on https://github.com/edfloreshz/cosmic-app-template
 When you open the repository in your code editor, you will see a lot of comments in the code. These comments are there to help you get a basic understanding of what each part of the code does.
 
 Once you feel comfortable with it, refer back to the [COSMIC documentation](https://pop-os.github.io/libcosmic/cosmic/) for more information on how to build COSMIC applications.
@@ -25,6 +25,7 @@ sudo apt install just
 After you install it, you can run the following commands to build and install your application:
 
 ```sh
+cargo update --precise c751217 cosmic-text  # https://github.com/pop-os/libcosmic/issues/596
 just build-release
 sudo just install
 ```

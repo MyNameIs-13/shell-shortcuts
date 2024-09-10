@@ -1,5 +1,5 @@
-name := 'cosmic-app-template'
-export APPID := 'com.example.CosmicAppTemplate'
+name := 'CosmicPopShortcuts'
+export APPID := 'com.github.MyNameIs-13.CosmicPopShortcuts'
 
 rootdir := ''
 prefix := '/usr'
@@ -24,6 +24,9 @@ metainfo-dst := clean(rootdir / prefix) / 'share' / 'metainfo' / metainfo
 
 icons-src := 'res' / 'icons' / 'hicolor'
 icons-dst := clean(rootdir / prefix) / 'share' / 'icons' / 'hicolor'
+
+icon-svg-src := icons-src / 'scalable' / 'apps' / 'icon.svg'
+icon-svg-dst := icons-dst / 'scalable' / 'apps' / APPID + '.svg'
 
 # Default recipe which runs `just build-release`
 default: build-release
@@ -67,11 +70,8 @@ run *args:
 # Installs files
 install:
     install -Dm0755 {{bin-src}} {{bin-dst}}
-    install -Dm0644 {{desktop-src}} {{desktop-dst}}
-    install -Dm0644 {{metainfo-src}} {{metainfo-dst}}
-    for size in `ls {{icons-src}}`; do \
-        install -Dm0644 "{{icons-src}}/$size/apps/{{APPID}}.svg" "{{icons-dst}}/$size/apps/{{APPID}}.svg"; \
-    done
+    install -Dm0644 res/app.desktop {{desktop-dst}}
+    install -Dm0644 {{icon-svg-src}} {{icon-svg-dst}}
 
 # Installs files
 flatpak:
@@ -81,7 +81,7 @@ flatpak:
     for size in `ls {{icons-src}}`; do \
         install -Dm0644 "{{icons-src}}/$size/apps/{{APPID}}.svg" "{{icons-dst}}/$size/apps/{{APPID}}.svg"; \
     done
-    
+
 debpkg: build-release
     cargo deb --no-build
 
@@ -90,6 +90,7 @@ uninstall:
     rm {{bin-dst}}
     rm {{desktop-dst}}
     rm {{metainfo-dst}}
+    rm {{icon-svg-dst}}
     for size in `ls {{icons-src}}`; do \
         rm "{{icons-dst}}/$size/apps/{{APPID}}.svg"; \
     done

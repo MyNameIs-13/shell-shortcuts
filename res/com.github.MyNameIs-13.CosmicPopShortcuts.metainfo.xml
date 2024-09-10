@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.github.MyNameIs-13.CosmicPopShortcuts</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-only</project_license>
+  <project_group>COSMIC</project_group>
+  <developer_name>MyNameIs-13</developer_name>
+  <update_contact>g.s@writeme.com</update_contact>
+  <url type="homepage"></url>
+  <url type="bugtracker"></url>
+  <name>Pop Keyboard Shortcuts</name>
+  <summary>Pop Keyboard Shortcuts Overview</summary>
+  <description>
+    <p>Pop Keyboard Shortcuts Overview</p>
+  </description>
+  <launchable type="desktop-id">com.github.MyNameIs-13.CosmicPopShortcuts.desktop</launchable>
+  <icon type="remote" height="256" width="256">https://raw.githubusercontent.com/MyNameIs-13/shell-shortcuts/develop/res/icons/hicolor/256x256/apps/com.github.MyNameIs-13.CosmicPopShortcuts.svg</icon>
+  <screenshots>
+  </screenshots>
+  <provides>
+    <mimetypes>
+      <mimetype>text/plain</mimetype>
+    </mimetypes>
+    <binaries>
+      <binary>pop-shortcuts</binary>
+    </binaries>
+  </provides>
+</component>
