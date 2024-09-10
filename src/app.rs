@@ -280,6 +280,10 @@ impl Application for PopShortcuts {
             .align_x(Horizontal::Center); // Center the container horizontally
 
             widget::scrollable(whatever)
+                .direction(cosmic::iced_widget::scrollable::Direction::Both {
+                    vertical:  cosmic::iced_widget::scrollable::Properties::new(),
+                    horizontal:  cosmic::iced_widget::scrollable::Properties::new()
+                })
                 .width(Length::Fill)
                 .into()
     }
