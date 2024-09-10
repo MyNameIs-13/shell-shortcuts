@@ -1,4 +1,4 @@
-name := 'CosmicPopShortcuts'
+name := 'pop-shortcuts'
 export APPID := 'com.github.MyNameIs-13.CosmicPopShortcuts'
 
 rootdir := ''
@@ -25,7 +25,7 @@ metainfo-dst := clean(rootdir / prefix) / 'share' / 'metainfo' / metainfo
 icons-src := 'res' / 'icons' / 'hicolor'
 icons-dst := clean(rootdir / prefix) / 'share' / 'icons' / 'hicolor'
 
-icon-svg-src := icons-src / 'scalable' / 'apps' / 'icon.svg'
+icon-svg-src := icons-src / 'scalable' / 'apps' / APPID + '.svg'
 icon-svg-dst := icons-dst / 'scalable' / 'apps' / APPID + '.svg'
 
 # Default recipe which runs `just build-release`
@@ -70,7 +70,8 @@ run *args:
 # Installs files
 install:
     install -Dm0755 {{bin-src}} {{bin-dst}}
-    install -Dm0644 res/app.desktop {{desktop-dst}}
+    install -Dm0644 {{desktop-src}} {{desktop-dst}}
+    install -Dm0644 {{metainfo-src}} {{metainfo-dst}}
     install -Dm0644 {{icon-svg-src}} {{icon-svg-dst}}
 
 # Installs files

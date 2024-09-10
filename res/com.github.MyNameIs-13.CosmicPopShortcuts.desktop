@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=COSMIC App Template
+Name=Pop Keyboard Shortcuts
 Exec=pop-shortcuts %F
 Terminal=false
 Type=Application
